@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import { Beaker, Factory, CheckCircle2, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import { Beaker, Factory, CheckCircle2, ChevronRight, Droplets } from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -25,75 +26,114 @@ export default function TCIPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="pt-40 pb-24 bg-slate-50 border-b border-slate-200">
-        <div className="container mx-auto px-6 lg:px-16">
+      {/* --- HERO SECTION --- */}
+      <section className="relative pt-40 pb-32 bg-slate-900 border-b border-slate-200 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=1972&auto=format&fit=crop"
+            alt="Textile Dyeing and Chemicals"
+            fill
+            className="object-cover opacity-40 mix-blend-overlay"
+            unoptimized
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent" />
+        </div>
+
+        <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-red-100 rounded-md text-red-700 font-bold text-xs tracking-widest mb-6">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-red-600/20 border border-red-500/30 rounded-md text-red-400 font-bold text-xs tracking-widest mb-6">
               <Beaker className="w-4 h-4" />
               <span>ESTABLISHED 1961</span>
             </div>
-            <h1 className="text-5xl lg:text-7xl font-black text-slate-900 leading-tight mb-6">
-              Textile Chemical <br/><span className="text-red-600">Industries</span>
+            <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight mb-6">
+              Textile Chemical <br/><span className="text-red-500">Industries</span>
             </h1>
-            <p className="text-xl text-slate-600 font-medium max-w-2xl leading-relaxed">
-              Specialized auxiliary chemicals for Textile, Paint, Leather, Coating, Printing & Dyeing Industries.
+            <p className="text-xl text-slate-300 font-medium max-w-2xl leading-relaxed">
+              Decades of expertise formulating specialized auxiliary chemicals for the Textile, Paint, Leather, Coating, Printing & Dyeing Industries.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Introduction */}
+      {/* --- INTRODUCTION --- */}
       <section className="py-24">
         <div className="container mx-auto px-6 lg:px-16">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Visual Block */}
+            <div className="grid grid-cols-2 gap-4 h-[600px]">
+              <div className="relative rounded-3xl overflow-hidden shadow-xl mt-8">
+                <Image 
+                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Industrial Plant" 
+                  fill 
+                  className="object-cover" 
+                  unoptimized 
+                />
+              </div>
+              <div className="relative rounded-3xl overflow-hidden shadow-xl mb-8">
+                <Image 
+                  src="https://images.unsplash.com/photo-1583086762635-4309b8b2fc13?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Chemical Formulation" 
+                  fill 
+                  className="object-cover" 
+                  unoptimized 
+                />
+              </div>
+            </div>
+
+            {/* Text Block */}
             <div className="space-y-8">
-              <h2 className="text-3xl font-black text-slate-900">Industry Leadership</h2>
+              <div className="inline-block px-4 py-1.5 bg-slate-100 text-slate-700 rounded-md text-xs font-bold tracking-widest uppercase">
+                Industry Leadership
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-black text-slate-900">Driving Pakistan's Largest Industrial Sector</h2>
               <div className="prose prose-lg text-slate-600 font-medium">
                 <p>
-                  Textiles is the single biggest sector of industrial output in Pakistan. TCI polymer division was upgraded and recruited to produce polymers that are compliant with international certifications such as IKEA, Oekotex, REACH and other standards.
+                  Textiles is the single biggest sector of industrial output in Pakistan. The TCI polymer division has been upgraded to produce polymers strictly compliant with international certifications such as <strong>IKEA, Oekotex, REACH</strong>, excluding all prohibited chemicals from the production process.
                 </p>
                 <p>
-                  Expertise was developed for pigment printing binders of various grades and strengths to meet end-user demands. Specialty chemicals in dyeing, printing, bleaching, desizing and finishing gained the trust of the market and promoted the company in the major leagues.
+                  Expertise was developed for pigment printing binders of various grades and strengths. Our specialty chemicals in dyeing, printing, bleaching, desizing, and finishing have gained the trust of the market and promoted the company into the major leagues.
                 </p>
                 <p>
-                  Research in TCI is an ongoing process since its inception. Our labs work every single working day of the week all year round, developing products that give end users a positive impact in costing, time quality, and environment.
+                  Research at TCI is an ongoing process. Our labs operate every single working day of the year, expanding the boundaries of our understanding of reactions and constantly exploring new counter-products to save precious foreign exchange.
+                </p>
+              </div>
+              
+              <div className="flex items-center gap-4 p-6 bg-red-50 rounded-2xl border border-red-100">
+                <Droplets className="w-10 h-10 text-red-600 shrink-0" />
+                <p className="text-sm font-bold text-red-900">
+                  Our entire system runs on Reverse Osmosis (RO) water, which is mandatory in precision chemical processing to prevent heavy metal contamination.
                 </p>
               </div>
             </div>
-            
-            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-10">
-              <div className="w-14 h-14 bg-red-600 rounded-xl flex items-center justify-center mb-6">
-                <Factory className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-black text-slate-900 mb-4">World-Class Facilities</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed">
-                TCI is not just plants, machinery and equipment. Our human resource potential is unmatched. The whole quality control and production is handled by a dedicated team. Safety comes first always, and our entire system runs on RO water which is mandatory in chemical processes.
-              </p>
-            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Products */}
-      <section className="py-24 bg-slate-900 text-white">
-        <div className="container mx-auto px-6 lg:px-16">
+      {/* --- PRODUCTS --- */}
+      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-[120px] pointer-events-none" />
+        
+        <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="max-w-3xl mb-16">
             <h2 className="text-4xl font-black mb-4">Textile Grade Products</h2>
-            <p className="text-lg text-slate-400">Manufactured to exact specifications with international compliance.</p>
+            <p className="text-lg text-slate-400">Manufactured to exact specifications with full international environmental compliance.</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {products.map((product, idx) => (
-              <div key={idx} className="bg-white/10 p-6 rounded-xl border border-white/10 backdrop-blur-sm flex items-center gap-4">
+              <div key={idx} className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm flex items-center gap-4 hover:bg-red-600/20 hover:border-red-500/50 transition-all duration-300">
                 <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0" />
-                <span className="font-bold text-slate-100">{product}</span>
+                <span className="font-bold text-slate-100 text-sm">{product}</span>
               </div>
             ))}
           </div>
           
           <div className="mt-16 text-center">
-            <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-colors">
+            <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 shadow-lg shadow-red-600/30 transition-all hover:-translate-y-1">
               Contact Sales Department <ChevronRight className="ml-2 w-5 h-5" />
             </Link>
           </div>
