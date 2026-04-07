@@ -16,8 +16,11 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+// Dynamically fetch the site URL from the environment
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ori-website-khaki.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://your-domain.com"), // Update this with actual production URL later
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Group of Companies | OCI, TCI, WDS",
     template: "%s | Group of Companies",
@@ -32,21 +35,17 @@ export const metadata: Metadata = {
     "Acrylic Emulsions Karachi",
     "Textile Auxiliary Chemicals",
     "Specialty Chemicals Pakistan",
-    "Korangi Industrial Area Chemicals",
+    "Polymer Manufacturing KPK",
   ],
-  authors: [
-    {
-      name: "Group of Companies",
-    },
-  ],
+  authors: [{ name: "Group of Companies" }],
   openGraph: {
     title: "Group of Companies | Premium Chemical Manufacturing",
-    description:
-      "Your Trusted Partner For Specialty Technology And Process since 1996.",
+    description: "Your Trusted Partner For Specialty Technology And Process since 1996.",
     siteName: "Group of Companies",
+    url: "/",
     images: [
       {
-        url: "/og-image.jpg", // Update image in public folder later
+        url: "/images/companyLogo.png", // Ensure you have a logo image here
         width: 1200,
         height: 630,
         alt: "Group of Companies Manufacturing Facility",
@@ -59,11 +58,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Group of Companies | Premium Chemical Manufacturing",
     description: "Leading chemical manufacturing in Pakistan since 1996",
-    images: ["/twitter-image.jpg"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -75,6 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Global Organization Schema for Google Knowledge Graph */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -82,6 +88,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Group of Companies",
+              url: siteUrl,
+              // logo: `${siteUrl}/images/companyLogo.png`,
               description:
                 "Leading manufacturing group including OCI, TCI, and WDS. Producing adhesives, textile chemicals, and synthetic polymers.",
               foundingDate: "1996",
@@ -99,7 +107,7 @@ export default function RootLayout({
                   addressLocality: "Industrial Estate, Gadoon Amazai",
                   addressRegion: "KPK",
                   addressCountry: "PK",
-                }
+                },
               ],
               contactPoint: {
                 "@type": "ContactPoint",

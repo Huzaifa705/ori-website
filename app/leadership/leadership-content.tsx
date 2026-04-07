@@ -106,12 +106,12 @@ export default function LeadershipContent() {
       </section>
 
       {/* Founder Profile Section */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Image Column */}
-              <div className="relative group">
+              {/*<div className="relative group">
                 <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
                   <Image
                     src={leaderImage}
@@ -124,7 +124,7 @@ export default function LeadershipContent() {
               </div>
 
               {/* Content Column */}
-              <div>
+              {/*<div>
                 <div className="inline-block mb-4">
                   <span className="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium">
                     Founder & CEO
@@ -166,7 +166,7 @@ export default function LeadershipContent() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Companies Section */}
       <section className="py-20 bg-slate-50">
@@ -181,7 +181,7 @@ export default function LeadershipContent() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            {/* <div className="grid md:grid-cols-2 gap-8">
               {companies.map((company, index) => (
                 <div
                   key={index}
@@ -209,7 +209,7 @@ export default function LeadershipContent() {
                   </p>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

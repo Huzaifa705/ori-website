@@ -2,15 +2,20 @@ import { Metadata } from 'next'
 import ContactContent from './contact-content'
 
 export const metadata: Metadata = {
-  title: "Contact Us | Get Chemical Solutions Quote",
-  description: "Contact Al-Ibrahim Group for chemical supply inquiries. Located in Karachi, Pakistan. 24-hour response time.",
-  keywords: ["contact Al-Ibrahim Group", "chemical supplier contact Karachi"],
+  title: "Contact Us | Group of Companies",
+  description: "Contact the Group of Companies (OCI, TCI, WDS) for specialized chemical supply inquiries and joint ventures. Manufacturing facilities in Karachi and KPK.",
+  keywords: ["contact OCI", "contact TCI", "contact WDS", "chemical supplier contact Pakistan", "joint ventures polymer"],
   alternates: {
-    canonical: "https://alibrahimgroupofcompanies.com/contact",
+    canonical: "/contact",
   },
+  openGraph: {
+    title: "Contact Us | Group of Companies",
+    url: "/contact",
+  }
 }
 
 export default function Contact() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ori-website-khaki.vercel.app/";
   return (
     <>
       <script
@@ -19,16 +24,25 @@ export default function Contact() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            "name": "Contact Al-Ibrahim Group",
-            "mainEntity": {
+            name: "Contact Group of Companies",
+            url: `${siteUrl}/contact`,
+            mainEntity: {
               "@type": "Organization",
-              "name": "Al-Ibrahim Group",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Karachi",
-                "addressRegion": "Sindh",
-                "addressCountry": "PK"
-              }
+              name: "Group of Companies",
+              contactPoint: [
+                {
+                  "@type": "ContactPoint",
+                  telephone: "+92-21-35012024",
+                  contactType: "Customer Service",
+                  email: "oci_chem@hotmail.com"
+                },
+                {
+                  "@type": "ContactPoint",
+                  telephone: "0938-270077",
+                  contactType: "Manufacturing Plant",
+                  email: "wds.chemical@gmail.com"
+                }
+              ]
             }
           })
         }}
