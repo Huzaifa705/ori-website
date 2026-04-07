@@ -2,10 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import leaderImage from "@/public/images/leadershipImage.jpeg";
-import universeledlogo from "../../public/images/universeLogo.png";
-import chemicalImage from "../../public/images/chemicalImage.jpeg";
+
 
 export default function LeadershipContent() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,7 +37,7 @@ export default function LeadershipContent() {
         "A core company of the Al-Ibrahim Group, primarily engaged in the import of chemicals, offering a vast range of high-quality chemical products to meet diverse industrial needs.",
       details:
         "The company emphasizes international sourcing standards, product reliability, and timely supply. With a strong focus on compliance, safety, and customer satisfaction, Ibrahim Chemicals serves multiple sectors while continuously expanding its product portfolio and strengthening its position in the chemical import market.",
-      image: chemicalImage.src,
+      // image: chemicalImage.src,
     },
     {
       name: "UNIVERSE LED",
@@ -48,7 +45,7 @@ export default function LeadershipContent() {
         "Another key venture of the group, specializes in the import and supply of LED products, providing a wide range of modern and energy-efficient LED solutions.",
       details:
         "The company is committed to delivering innovative lighting products that combine performance, durability, and sustainability. By keeping pace with evolving technology and market trends, Universe LED aims to support energy conservation while offering reliable lighting solutions for residential, commercial, and industrial applications.",
-      image: universeledlogo.src,
+      // image: universeledlogo.src,
     },
   ];
 
