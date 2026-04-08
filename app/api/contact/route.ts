@@ -1,156 +1,56 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: NextRequest) {
   try {
-    // Form data get karo
     const body = await req.json();
     const { name, email, phone, company, message, industry } = body;
 
-    // Validation - check required fields
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: 'Name, email, and message are required' },
-        { status: 400 }
-      );
+    // Graceful check for API Key
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === '<apikey-here>') {
+      console.warn("⚠️ Email API Key is not configured. Form details logged to console.");
+      console.log("Inquiry Data:", body);
+      return NextResponse.json({
+        message: 'Dev mode: Details logged to console'
+      }, { status: 200 });
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      );
-    }
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
-    // Admin ko email bhejo
     const { data, error } = await resend.emails.send({
-      from: 'Al-Ibrahim Contact Form <onboarding@resend.dev>',
+      from: 'Group of Companies <onboarding@resend.dev>',
       to: process.env.ADMIN_EMAIL!,
       replyTo: email,
-      subject: `New Contact Form Submission - ${industry || ''}`,
+      subject: `[${industry || 'General'}] Technical Inquiry from ${name}`,
       html: `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: #2563eb; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-            .content { background: #f9fafb; padding: 20px; border: 1px solid #e5e7eb; }
-            .field { margin-bottom: 15px; }
-            .label { font-weight: bold; color: #1f2937; }
-            .value { color: #4b5563; margin-top: 5px; }
-            .footer { background: #f3f4f6; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h2 style="margin: 0;">🔔 New Contact Form Submission</h2>
+        <div style="font-family: sans-serif; padding: 40px; background-color: #f8fafc;">
+          <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0;">
+            <div style="background: #dc2626; padding: 30px; color: white;">
+              <h2 style="margin: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Technical Inquiry</h2>
+              <h1 style="margin: 5px 0 0 0; font-size: 24px;">New Submission Received</h1>
             </div>
-            <div class="content">
-              <div class="field">
-                <div class="label">Name:</div>
-                <div class="value">${name}</div>
-              </div>
-              <div class="field">
-                <div class="label">Email:</div>
-                <div class="value"><a href="mailto:${email}">${email}</a></div>
-              </div>
-              ${phone ? `
-                <div class="field">
-                  <div class="label">Phone:</div>
-                  <div class="value">${phone}</div>
-                </div>
-              ` : ''}
-              ${company ? `
-                <div class="field">
-                  <div class="label">Company:</div>
-                  <div class="value">${company}</div>
-                </div>
-              ` : ''}
-              ${industry ? `
-                <div class="field">
-                  <div class="label">Industry:</div>
-                  <div class="value">${industry}</div>
-                </div>
-              ` : ''}
-              <div class="field">
-                <div class="label">Message:</div>
-                <div class="value">${message.replace(/\n/g, '<br>')}</div>
-              </div>
+            <div style="padding: 30px; color: #1e293b; line-height: 1.6;">
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
+              ${industry ? `<p><strong>Division:</strong> ${industry}</p>` : ''}
+              <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 20px 0;" />
+              <p><strong>Requirement Details:</strong></p>
+              <p style="background: #f1f5f9; padding: 20px; border-radius: 12px; font-style: italic;">${message.replace(/\n/g, '<br>')}</p>
             </div>
-            <div class="footer">
-              <p>Received on ${new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })}</p>
-              <p>Al-Ibrahim Group - Contact Form</p>
+            <div style="background: #f8fafc; padding: 20px; text-align: center; color: #64748b; font-size: 11px; text-transform: uppercase;">
+              Group of Companies | Internal Manufacturing CRM
             </div>
           </div>
-        </body>
-        </html>
+        </div>
       `,
     });
 
- 
-    if (error) {
-  console.error('Resend error:', error);
-  console.error('Error details:', JSON.stringify(error, null, 2));
-  return NextResponse.json({ error: 'Failed to send email', details: error }, { status: 500 });
-}
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-    // auto reply to user
-    // await resend.emails.send({
-    //   from: 'Al-Ibrahim Group <onboarding@resend.dev>',
-    //   to: email,
-    //   subject: 'Thank you for contacting Al-Ibrahim Group',
-    //   html: `
-    //     <!DOCTYPE html>
-    //     <html>
-    //     <head>
-    //       <style>
-    //         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    //         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    //         .header { background: #2563eb; color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
-    //         .content { background: white; padding: 30px; border: 1px solid #e5e7eb; }
-    //         .footer { background: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #6b7280; }
-    //       </style>
-    //     </head>
-    //     <body>
-    //       <div class="container">
-    //         <div class="header">
-    //           <h1 style="margin: 0;">✅ Thank You!</h1>
-    //         </div>
-    //         <div class="content">
-    //           <h2>Dear ${name},</h2>
-    //           <p>Thank you for contacting <strong>Al-Ibrahim Group</strong>.</p>
-    //           <p>We have received your inquiry and our team will review it shortly. You can expect a response within <strong>24 hours</strong>.</p>
-    //           <p>If you have any urgent questions, feel free to call us directly.</p>
-    //           <p>Best regards,<br/>
-    //           <strong>Al-Ibrahim Group Team</strong></p>
-    //         </div>
-    //         <div class="footer">
-    //           <p>Al-Ibrahim Group | Karachi, Pakistan</p>
-    //           <p>This is an automated message. Please do not reply to this email.</p>
-    //         </div>
-    //       </div>
-    //     </body>
-    //     </html>
-    //   `,
-    // });
-
-    return NextResponse.json(
-      { message: 'Email sent successfully', data },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: 'Inquiry transmitted successfully', data }, { status: 200 });
 
   } catch (error) {
-    console.error('Contact form error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Inquiry transmission failed. Please contact us via phone.' }, { status: 500 });
   }
 }
