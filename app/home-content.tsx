@@ -55,7 +55,7 @@ export default function HomeContent() {
       shortName: "OCI CHEM",
       desc: "Specializing in PVAc, pure acrylic, and styrene acrylic emulsions since 1996. Operating with 100-ton daily handling capacity.",
       icon: <FlaskConical className="w-6 h-6 md:w-8 md:h-8" />,
-      image: "https://images.unsplash.com/photo-1617155093730-a8bf47be792d?q=80&w=2070&auto=format&fit=crop",
+      image: "/images/oci-logo.jpg", // UPDATED
       href: "/oci",
       since: "1996"
     },
@@ -65,7 +65,7 @@ export default function HomeContent() {
       shortName: "TCI",
       desc: "Producer of international-grade auxiliary chemicals. Fully compliant with IKEA, Oekotex, and REACH standards since 1961.",
       icon: <Beaker className="w-6 h-6 md:w-8 md:h-8" />,
-      image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=1972&auto=format&fit=crop",
+      image: "/images/tci-logo.jpg", // UPDATED
       href: "/tci",
       since: "1961"
     },
@@ -75,7 +75,7 @@ export default function HomeContent() {
       shortName: "WDS",
       desc: "Advanced manufacturing facility strategically located for Chinese joint ventures and global export-oriented polymer production.",
       icon: <Factory className="w-6 h-6 md:w-8 md:h-8" />,
-      image: "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?q=80&w=2070&auto=format&fit=crop",
+      image: "/images/wds-logo.jpg", // UPDATED
       href: "/wds",
       since: "2020"
     }
@@ -126,8 +126,8 @@ export default function HomeContent() {
               </motion.div>
 
               <motion.h1 variants={fadeInUp} className="text-4xl sm:text-6xl lg:text-8xl font-black leading-tight text-white tracking-tighter uppercase">
-                GROUP OF <br />
-                <span className="text-red-600">COMPANIES</span>
+                OCI <br />
+                <span className="text-red-600">GROUP</span>
               </motion.h1>
 
               <motion.p variants={fadeInUp} className="text-base md:text-xl text-slate-400 leading-relaxed font-medium max-w-2xl">
@@ -264,7 +264,7 @@ export default function HomeContent() {
                   className="relative z-10 rounded-3xl lg:rounded-[3rem] overflow-hidden shadow-2xl border-[8px] md:border-[16px] border-slate-100"
                 >
                   <Image
-                    src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2070&auto=format&fit=crop"
+                    src="/images/wds-lab-image.jpeg"
                     alt="R&D Lab Facility"
                     width={800}
                     height={1000}

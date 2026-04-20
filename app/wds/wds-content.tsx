@@ -50,21 +50,20 @@ export default function WDSContent() {
                 key="wds-page"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                 exit={{ opacity: 0 }}
                 className="min-h-screen bg-white selection:bg-red-100 selection:text-red-900 overflow-x-hidden"
             >
                 {/* --- HERO SECTION --- */}
-                <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-slate-950 overflow-hidden">
+                <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-slate-600 overflow-hidden">
                     <div className="absolute inset-0 z-0">
                         <Image
-                            src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?q=80&w=2070&auto=format&fit=crop"
-                            alt="Large Scale Industrial Plant"
+                            src="/images/pipes-image.jpeg"
+                            alt="Synthetic Polymer PVC Pipes"
                             fill
-                            className="object-cover opacity-20"
-                            unoptimized
+                            className="object-cover opacity-25"
                             priority
                         />
-                        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-850/80 to-transparent" />
                     </div>
 
                     <div className="container mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
@@ -74,6 +73,14 @@ export default function WDSContent() {
                             animate="visible"
                             className="max-w-4xl space-y-6 md:space-y-8"
                         >
+                            <div className="relative w-20 h-20 shrink-0 bg-white rounded-sm overflow-hidden flex items-center justify-center">
+                                <Image
+                                    src="/images/wds-logo.jpg"
+                                    alt="WDS Logo"
+                                    fill
+                                    className="object-contain p-0.5"
+                                />
+                            </div>
                             <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 px-3 py-1 bg-red-600/20 border border-red-500/30 rounded-md text-red-400 font-bold text-[10px] tracking-widest uppercase">
                                 <Building2 className="w-3.5 h-3.5 shrink-0" />
                                 <span>Established 2020</span>
@@ -154,11 +161,10 @@ export default function WDSContent() {
                                     className="relative rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl border-[6px] md:border-[12px] border-slate-100 h-[350px] md:h-[600px] w-full"
                                 >
                                     <Image
-                                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
-                                        alt="Industrial Logistics and Storage"
+                                        src="/images/wds-lab-image.jpeg"
+                                        alt="WDS Laboratory and Logistics"
                                         fill
                                         className="object-cover"
-                                        unoptimized
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent flex flex-col justify-end p-6 md:p-12">
                                         <div className="w-10 h-10 md:w-16 md:h-16 bg-red-600 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 shadow-xl shrink-0">

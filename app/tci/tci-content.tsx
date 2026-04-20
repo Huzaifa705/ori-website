@@ -55,17 +55,16 @@ export default function TCIContent() {
         className="min-h-screen bg-white selection:bg-red-100 selection:text-red-900 overflow-x-hidden"
       >
         {/* --- HERO SECTION --- */}
-        <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-slate-950 overflow-hidden">
+        <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-slate-600 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.unsplash.com/photo-1624226359404-365287f39459?q=80&w=2070"
-              alt="Textile Polymer Engineering"
+              src="/images/cloth-image.jpeg"
+              alt="Textile Fabrics and Auxiliary Chemicals"
               fill
-              className="object-cover opacity-20"
-              unoptimized
+              className="object-cover opacity-25"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-850/90 to-transparent" />
           </div>
 
           <div className="container mx-auto px-5 sm:px-10 lg:px-16 relative z-10">
@@ -75,6 +74,14 @@ export default function TCIContent() {
               animate="visible"
               className="max-w-4xl space-y-6 md:space-y-8"
             >
+              <div className="relative w-20 h-20 shrink-0 bg-white rounded-lg overflow-hidden flex items-center justify-center">
+                <Image
+                  src="/images/tci-logo.jpg"
+                  alt="TCI Logo"
+                  fill
+                  className="object-contain p-0.5"
+                />
+              </div>
               <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 px-3 py-1 bg-red-600/20 border border-red-500/30 rounded-md text-red-400 font-bold text-[10px] tracking-widest uppercase">
                 <Beaker className="w-3.5 h-3.5" />
                 <span>Established 1961</span>
@@ -151,11 +158,10 @@ export default function TCIContent() {
                   className="relative rounded-3xl lg:rounded-[3rem] overflow-hidden shadow-2xl border-[10px] md:border-[16px] border-slate-100 h-[450px] md:h-[600px]"
                 >
                   <Image
-                    src="https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=2070"
+                    src="/images/tci-image.jpeg"
                     alt="24/7 Laboratory Operations"
                     fill
                     className="object-cover"
-                    unoptimized
                   />
                   <div className="absolute inset-0 bg-slate-950/40 flex flex-col justify-end p-8 md:p-12">
                     <div className="w-12 h-12 md:w-16 md:h-16 bg-red-600 rounded-2xl flex items-center justify-center mb-4 shadow-xl">

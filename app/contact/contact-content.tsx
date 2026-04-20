@@ -4,16 +4,11 @@ import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import {
   MapPin,
-  Phone,
-  Mail,
-  Navigation,
   Send,
-  Building2,
   UserCircle,
   AlertCircle,
   CheckCircle2
 } from "lucide-react";
-import Image from "next/image";
 
 // --- TYPE-SAFE VARIANTS ---
 const containerVariants: Variants = {
@@ -67,7 +62,6 @@ export default function ContactContent() {
       const result = await response.json();
 
       if (!response.ok) {
-        // Graceful handling for missing API keys or server errors
         throw new Error(result.error || "Communication error. Please try calling directly.");
       }
 
@@ -86,21 +80,21 @@ export default function ContactContent() {
       company: "Oriental Chemical Industries (OCI)",
       name: "Bakhtiar Ali Khan",
       email: "oci_chem@hotmail.com",
-      phone: "+92-334-1970228 / +92-300-2584609",
+      phone: "0300-2584609",
       role: "Director"
     },
     {
       company: "Textile Chemical Industries (TCI)",
       name: "Daniyal Khan Yousufzai",
       email: "tci_chem@yahoo.com",
-      phone: "+92-330-8173754",
+      phone: "03308173754",
       role: "Director"
     },
     {
       company: "W.D.S. Synthetic Polymer",
-      name: "Wania / Daniyal / Sufiyan Khan",
+      name: "Wania Khan Yousafzai / Daniyal Khan Yousafzai / Sufiyan Khan Yousafzai",
       email: "wds.chemical@gmail.com",
-      phone: "0938-270077",
+      phone: "0313-0958327 / 0311-2837629 / 0330-8173754",
       role: "Board of Directors"
     }
   ];
@@ -209,13 +203,39 @@ export default function ContactContent() {
                     <div className="shrink-0 w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors">
                       <UserCircle className="w-6 h-6" />
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-[12px] font-black text-red-600 uppercase tracking-widest mb-1">{contact.company}</p>
-                      <h4 className="text-base font-black text-slate-900">{contact.name}</h4>
                       <p className="text-[10px] font-bold text-slate-400 uppercase mb-3">{contact.role}</p>
-                      <div className="flex flex-col gap-1 text-sm font-bold text-slate-600">
-                        <a href={`mailto:${contact.email}`} className="hover:text-red-600 truncate">{contact.email}</a>
-                        <a href={`tel:${contact.phone}`} className="hover:text-red-600">{contact.phone}</a>
+
+                      {/* Unified Mapping Logic */}
+                      <div className="space-y-3 mb-4">
+                        {contact.name.split("/").map((n, i) => {
+                          const name = n.trim();
+                          const phones = contact.phone.split("/");
+                          // Match the phone index to the name index, fallback to the first phone if lengths mismatch
+                          const phone = phones[i] ? phones[i].trim() : phones[0].trim();
+
+                          // Format for dialer: remove spaces and hyphens for the tel: link
+                          const safeTel = phone.replace(/[^0-9+]/g, '');
+
+                          return (
+                            <div key={i}>
+                              <h4 className="text-base font-black text-slate-900">{name}</h4>
+                              <a
+                                href={`tel:${safeTel}`}
+                                className="inline-block mt-0.5 text-sm font-bold text-slate-600 hover:text-red-600 transition-colors"
+                              >
+                                {phone}
+                              </a>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div className="pt-3 border-t border-slate-100">
+                        <a href={`mailto:${contact.email}`} className="text-sm font-bold text-slate-600 hover:text-red-600 truncate block transition-colors">
+                          {contact.email}
+                        </a>
                       </div>
                     </div>
                   </motion.div>

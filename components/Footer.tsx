@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Globe, ArrowUpRight } from "lucide-react";
+import { MapPin, Phone, ArrowUpRight } from "lucide-react";
 
 const Footer = () => {
   const navLinks = [
@@ -16,7 +17,6 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-slate-950 border-t border-white/5 overflow-hidden">
-      {/* Subtle Background Glow */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-16 py-20">
@@ -30,10 +30,14 @@ const Footer = () => {
           {/* Identity */}
           <div className="md:col-span-5 space-y-8">
             <div className="flex flex-col">
-              <h2 className="text-3xl font-black tracking-tighter text-white uppercase leading-none">
-                GROUP OF
-                <span className="block text-red-600 text-xl font-black tracking-[0.2em]">COMPANIES</span>
-              </h2>
+              <Link href="/" className="relative w-20 overflow-hidden h-20 rounded-full inline-block bg-white/10 p-4 backdrop-blur-sm">
+                <Image 
+                  src="/images/oci-logo.jpg" 
+                  alt="OCI Logo" 
+                  fill 
+                  className="object-contain p-2" 
+                />
+              </Link>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
               Your Trusted Partner For Specialty Technology And Process since 1996.
@@ -61,11 +65,10 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Location Data from Pamphlet */}
+          {/* Location Data */}
           <div className="md:col-span-4 space-y-8">
             <h4 className="text-xs font-black tracking-widest uppercase text-white">Manufacturing Bases</h4>
             <div className="space-y-6">
-
               <div className="flex items-start space-x-4 group">
                 <MapPin className="text-red-600 mt-1 flex-shrink-0" size={18} />
                 <span className="text-slate-400 text-sm leading-relaxed transition-colors group-hover:text-slate-300">
@@ -73,7 +76,6 @@ const Footer = () => {
                   Plot # 4/44 & 4/11, Sector 21<br />Korangi Industrial Area, Karachi
                 </span>
               </div>
-
               <div className="flex items-start space-x-4 group">
                 <MapPin className="text-red-600 mt-1 flex-shrink-0" size={18} />
                 <span className="text-slate-400 text-sm leading-relaxed transition-colors group-hover:text-slate-300">
@@ -81,7 +83,6 @@ const Footer = () => {
                   Plot # L-20, Road# 1, Industrial Estate<br />Gadoon Amazai, K.P.K
                 </span>
               </div>
-
               <div className="flex items-center space-x-4 pt-4 border-t border-white/5">
                 <Phone className="text-red-600" size={18} />
                 <span className="font-bold text-white text-sm">021-35012024 / 0938-270077</span>
@@ -93,7 +94,7 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.2em]">
-            © {new Date().getFullYear()} Group of Companies. All rights reserved.
+            © {new Date().getFullYear()} OCI Group. All rights reserved.
           </p>
           <div className="flex space-x-8">
             <Link href="/privacy" className="text-[10px] font-black text-slate-600 hover:text-white uppercase tracking-widest transition-colors">Privacy</Link>

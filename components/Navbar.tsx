@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Menu, X, ChevronRight } from "lucide-react";
 
@@ -36,7 +37,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent background scroll when mobile menu is open to maintain UI consistency
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "unset";
@@ -52,9 +52,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-[500] transition-all duration-300 ${
-        // Fixed: Ensure background is solid and has a shadow when menu is open or page is scrolled
-        isOpen || scrolled
+      className={`fixed top-0 w-full z-[500] transition-all duration-300 ${isOpen || scrolled
           ? "bg-white shadow-xl py-3"
           : "bg-white backdrop-blur-md py-5 sm:bg-white"
         }`}
@@ -62,18 +60,16 @@ const Navbar = () => {
       <div className="container mx-auto px-6 lg:px-16">
         <div className="flex items-center justify-between">
 
-          {/* LOGO */}
-          <Link href="/" className="flex items-center space-x-3 group relative z-[510]">
-            <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white font-black text-xl shadow-lg group-hover:rotate-12 transition-transform">
-              G
-            </div>
-            <div className="flex flex-col">
-              <span className="font-black text-lg leading-none tracking-tighter text-slate-900">
-                GROUP OF
-              </span>
-              <span className="text-red-600 text-[10px] font-black tracking-[0.2em] uppercase">
-                COMPANIES
-              </span>
+          {/* BRAND LOGO */}
+          <Link href="/" className="flex items-center group relative z-[510]">
+            <div className="relative w-32 h-12 md:w-40 md:h-14 transition-transform group-hover:scale-105">
+              <Image
+                src="/images/oci-logo.jpg"
+                alt="OCI Logo"
+                fill
+                className="object-contain object-left"
+                priority
+              />
             </div>
           </Link>
 
@@ -97,7 +93,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* MOBILE TOGGLE - Increased z-index to stay above drawer content */}
+          {/* MOBILE TOGGLE */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`xl:hidden p-2 rounded-lg transition-colors relative z-[510] ${isOpen || scrolled ? "text-slate-900 bg-slate-100" : "text-slate-600 bg-white/10"
@@ -108,7 +104,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* MOBILE MENU DRAWER - FIXED: Solid background and shadow to prevent content overlapping */}
+      {/* MOBILE MENU DRAWER */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
